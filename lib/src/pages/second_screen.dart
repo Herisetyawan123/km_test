@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:km_test/src/constant/color.dart';
 import 'package:km_test/src/pages/widget/btn_primary.dart';
+import 'package:km_test/src/providers/user/user_provider.dart';
 import 'package:km_test/src/routes.dart';
+import 'package:provider/provider.dart';
 
 class SecondScreen extends StatelessWidget {
   const SecondScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final name = Provider.of<UserProvider>(context, listen: false).myname;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -45,7 +48,7 @@ class SecondScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "John Doe",
+                    name,
                     style: GoogleFonts.poppins(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
