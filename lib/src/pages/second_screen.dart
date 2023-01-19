@@ -12,6 +12,7 @@ class SecondScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final name = Provider.of<UserProvider>(context, listen: false).myname;
+    final selected = Provider.of<UserProvider>(context, listen: false).selected;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -62,7 +63,7 @@ class SecondScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Select User Name",
+                    selected ? "Selected Username: $name" : "Select User Name",
                     style: GoogleFonts.poppins(
                       fontSize: 24,
                       fontWeight: FontWeight.w600,

@@ -4,8 +4,10 @@ import 'package:km_test/src/constant/color.dart';
 import 'package:km_test/src/pages/widget/btn_primary.dart';
 import 'package:km_test/src/pages/widget/input_form.dart';
 import 'package:km_test/src/pages/widget/space_h.dart';
+import 'package:km_test/src/providers/user/user_provider.dart';
 import 'package:km_test/src/routes.dart';
 import 'package:km_test/src/utils/palindrome.dart';
+import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -81,7 +83,25 @@ class _SplashScreenState extends State<SplashScreen> {
               ButtonPrimary(
                 width: width,
                 text: "NEXT",
-                function: () => Navigator.of(context).pushNamed(MyRoute.second),
+                function: () {
+                  if (name.text != "" || palindrome.text != "") {
+                    if (checkPalindrome(palindrome.text)) {
+                      Provider.of<UserProvider>(context, listen: false)
+                          .getName(name.text);
+                      Navigator.of(context).pushNamed(MyRoute.second);
+                    } else {
+                      alertDialog(
+                        context,
+                        "not palindrome",
+                      );
+                    }
+                  } else {
+                    alertDialog(
+                      context,
+                      "Field tidak boleh kosong",
+                    );
+                  }
+                },
               )
             ],
           ),

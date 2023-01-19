@@ -11,12 +11,19 @@ class UserProvider with ChangeNotifier {
     _userService = UserService();
   }
   int _page = 1;
+  bool _selected = false;
   List<UserModel>? _users;
   List<UserModel> get users => _users!;
   String get myname => _myname;
+  bool get selected => _selected;
 
   void getName(name) {
     _myname = name;
+    notifyListeners();
+  }
+
+  void selection() {
+    _selected = true;
     notifyListeners();
   }
 

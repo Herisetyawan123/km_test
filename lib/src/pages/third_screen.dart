@@ -5,6 +5,7 @@ import 'package:km_test/src/models/user_model.dart';
 import 'package:km_test/src/pages/widget/btn_primary.dart';
 import 'package:km_test/src/pages/widget/space_w.dart';
 import 'package:km_test/src/providers/user/user_provider.dart';
+import 'package:km_test/src/routes.dart';
 import 'package:provider/provider.dart';
 
 class ThirdScreen extends StatelessWidget {
@@ -136,44 +137,50 @@ class CardUser extends StatelessWidget {
   final UserModel data;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        vertical: 15,
-        horizontal: 18,
-      ),
-      width: MediaQuery.of(context).size.width,
-      margin: const EdgeInsets.symmetric(
-        vertical: 5,
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: 50,
-            height: 50,
-            decoration: BoxDecoration(
-              color: Colors.grey,
-              borderRadius: BorderRadius.circular(100),
+    return InkWell(
+      onTap: () {
+        Provider.of<UserProvider>(context, listen: false)
+            .getName("${data.firstName} ${data.lastName}");
+        Provider.of<UserProvider>(context, listen: false).selection();
+        Navigator.pushNamed(context, MyRoute.second);
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          vertical: 15,
+          horizontal: 18,
+        ),
+        width: MediaQuery.of(context).size.width,
+        margin: const EdgeInsets.symmetric(
+          vertical: 5,
+        ),
+        child: Row(
+          children: [
+            CircleAvatar(
+              radius: 30,
+              backgroundImage: NetworkImage(
+                data.avatar,
+              ),
             ),
-          ),
-          spaceW(20),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "${data.firstName} ${data.lastName}",
-                style: GoogleFonts.poppins(
-                  fontSize: 16,
+            spaceW(20),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "${data.firstName} ${data.lastName}",
+                  style: GoogleFonts.poppins(
+                    fontSize: 16,
+                  ),
                 ),
-              ),
-              Text(
-                data.email,
-                style: GoogleFonts.poppins(
-                  fontSize: 10,
+                Text(
+                  data.email,
+                  style: GoogleFonts.poppins(
+                    fontSize: 10,
+                  ),
                 ),
-              ),
-            ],
-          )
-        ],
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
