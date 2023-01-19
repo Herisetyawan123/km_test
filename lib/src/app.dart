@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:km_test/src/constant/color.dart';
 import 'package:km_test/src/routes.dart';
 
 class MyApp extends StatelessWidget {
@@ -11,6 +13,17 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: MyRoute.splash,
       routes: MyRoute.data,
+      theme: ThemeData(
+        appBarTheme: AppBarTheme(
+            elevation: 0,
+            foregroundColor: black,
+            backgroundColor: white,
+            centerTitle: true,
+            titleTextStyle: GoogleFonts.poppins(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+            )),
+      ),
     );
   }
 }
